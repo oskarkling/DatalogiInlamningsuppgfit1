@@ -117,7 +117,7 @@ namespace DatalogiInlamningsuppgfit1
             Console.WriteLine("Enter a prime number");
             int validNumber;
             var input = Console.ReadLine();
-            if(Utils.IsInputValid(input, out validNumber, out errormsg))
+            if(Utils.IsInputValid(input, out validNumber, out errormsg, false))
             {
                 if (Utils.IsPrimeNumber(validNumber))
                 {

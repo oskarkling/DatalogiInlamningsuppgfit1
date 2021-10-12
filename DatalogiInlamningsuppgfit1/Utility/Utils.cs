@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,38 +37,21 @@ namespace DatalogiInlamningsuppgfit1.Utility
             errormsg = "no error";
             validNumber = 0;
 
-            if (IsInputEmpty(input))
+            if (IsInputValid(input, out validNumber, out errormsg, true))
             {
-                errormsg = "Input was empty\n";
-                return false;
-            }
-            else
-            {
-                if (IsInputANumber(input, out validNumber))
+                if(validNumber < nrOfMenuChoices)
                 {
-                    if(!IsNumberNegative(validNumber))
-                    {
-                        if(validNumber < nrOfMenuChoices)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            errormsg = "Not valid menu choice\n";
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        errormsg = "No negative numbers here!\n";
-                        return false;
-                    }
+                    return true;
                 }
                 else
                 {
-                    errormsg = "Input was not a number\n";
+                    errormsg = $"Menu choice is out for range for menu choices. Use 0 - {nrOfMenuChoices - 1}";
                     return false;
                 }
+            }
+            else
+            {
+                return false;
             }
 
         }
@@ -75,10 +59,11 @@ namespace DatalogiInlamningsuppgfit1.Utility
         // Checks if user input is valid
         // if its empty, anumber or if the input is zero
         // if not successful it sends an errormsg also.
-        public static bool IsInputValid(string input, out int validNumber, out string errormsg)
+        public static bool IsInputValid(string input, out int validNumber, out string errormsg, bool canBeZero)
         {
             errormsg = "no error";
             validNumber = 0;
+
             if(IsInputEmpty(input)) 
             {
                 errormsg = "Input was empty\n";
@@ -90,14 +75,21 @@ namespace DatalogiInlamningsuppgfit1.Utility
                 {
                     if(!IsNumberNegative(validNumber))
                     {
-                        if(validNumber != 0)
+                        if(canBeZero)
                         {
                             return true;
                         }
                         else
                         {
-                            errormsg = "You can not input 0.\nIs 0 a Natural Number? No, 0 is NOT a natural number because natural numbers are counting numbers. For counting any number of objects, we start counting from 1 and not from 0.";
-                            return false;
+                            if(validNumber != 0)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                errormsg = "You can not input 0.\nIs 0 a Natural Number? No, 0 is NOT a natural number because natural numbers are counting numbers. For counting any number of objects, we start counting from 1 and not from 0.";
+                                return false;
+                            }
                         }
                     }
                     else
@@ -108,11 +100,12 @@ namespace DatalogiInlamningsuppgfit1.Utility
                 }
                 else
                 {
-                    errormsg = "Input was not a number\n";
+                    errormsg = "Input was not a valid number\n";
                     return false;
-                }
+                }        
             }
         }
+
 
         // Checks if the lsit is null or just has no elements
         public static bool IsListEmpty<T>(List<T> list)
@@ -137,6 +130,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
                     found = true;
                 }
             }
+
             return number;
         }
 
@@ -158,6 +152,5 @@ namespace DatalogiInlamningsuppgfit1.Utility
         {
             return number < 0;
         }
-
     }
 }
