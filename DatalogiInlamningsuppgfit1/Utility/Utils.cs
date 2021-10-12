@@ -29,9 +29,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
             return true;
         }
 
-        // Checks if user input is valid
-        // if its empty, a number, if its within the menu range.
-        // also sends an errormsg if input is not valid
+        // Checks if user menu input is valid
         public static bool IsMenuInputValid(string input, out int validNumber, out string errormsg, int nrOfMenuChoices)
         {
             errormsg = "no error";
