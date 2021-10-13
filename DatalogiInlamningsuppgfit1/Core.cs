@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Diagnostics;
 using DatalogiInlamningsuppgfit1.Utility;
 using DatalogiInlamningsuppgfit1;
-using System.Threading;
 using DatalogiInlamningsuppgfit1.DataStructures;
 
 namespace DatalogiInlamningsuppgfit1
@@ -16,10 +17,12 @@ namespace DatalogiInlamningsuppgfit1
         private long nrOfMenuChoices;
         private string errormsg;
         private BinaryTree binTree;
+        private Stopwatch stopwatch;
 
         // Constructor initalizes the variables and list
         internal Core()
         {
+            stopwatch = new Stopwatch();
             binTree = new BinaryTree();
             Visuals.Welcome();
             Thread.Sleep(1000);
@@ -140,23 +143,29 @@ namespace DatalogiInlamningsuppgfit1
             var input = Console.ReadLine();
             if(Utils.IsInputValid(input, out validNumber, out errormsg, false))
             {
+                stopwatch.Start();
                 if (Utils.IsPrimeNumber(validNumber))
                 {
                     Console.Clear();
-                    
                     if(binTree.Add(validNumber))
-                    { 
+                    {
+                        stopwatch.Stop();
                         Console.WriteLine($"{validNumber} is a prime number!\nAnd is now added to the binary tree :)\n");
+                        Console.WriteLine("Code execution to check number was " + stopwatch.ElapsedMilliseconds + " ms\n");
                     }
                     else
                     {
+                        stopwatch.Stop();
                         Console.WriteLine("Value already exists in the binary tree\nChoose another one\n");
+                        Console.WriteLine("Code execution to check number was " + stopwatch.ElapsedMilliseconds + " ms\n");
                     }
                 }
                 else
                 {
+                    stopwatch.Stop();
                     Console.Clear();
                     Console.WriteLine($"Im sorry but {validNumber} is not a prime number\n");
+                    Console.WriteLine("Code execution to check number was " + stopwatch.ElapsedMilliseconds + " ms\n");
                 }
             }
             else
