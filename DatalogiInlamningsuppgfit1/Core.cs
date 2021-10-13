@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DatalogiInlamningsuppgfit1.Utility;
 using DatalogiInlamningsuppgfit1;
 using System.Threading;
+using DatalogiInlamningsuppgfit1.DataStructures;
 
 namespace DatalogiInlamningsuppgfit1
 {
@@ -14,13 +15,12 @@ namespace DatalogiInlamningsuppgfit1
         private int menuChoice;
         private int nrOfMenuChoices;
         private string errormsg;
-        private List<int> listOfPrimes;
+        private BinaryTree binTree;
 
         // Constructor initalizes the variables and list
         internal Core()
         {
-            listOfPrimes = new List<int>();
-            nrOfMenuChoices = 4;
+            binTree = new BinaryTree();
             Visuals.Welcome();
             Thread.Sleep(1000);
             Menu();
@@ -30,9 +30,10 @@ namespace DatalogiInlamningsuppgfit1
         private void Menu()
         {
             bool runMenu = true;
-            while(runMenu)
+            nrOfMenuChoices = 4;
+            while (runMenu)
             {
-                Console.WriteLine("1. Add prime nr\n2. Show datastructure of added prime numbers (List)\n3. Add next prime number of the highest number in the data structure\n0. Exit\n");
+                Console.WriteLine("1. Add prime nr\n2. Show binary tree of added primes\n3. Add next prime number of the highest number in the data structure\n0. Exit\n");
                 var input = Console.ReadLine();
                 if (Utils.IsMenuInputValid(input, out menuChoice, out errormsg, nrOfMenuChoices))
                 {
@@ -63,25 +64,17 @@ namespace DatalogiInlamningsuppgfit1
             }
         }
 
-        // Adds the next prime number of the highest prime number in the data structure to the data strucutre.
-        // Also checks if the data structure is empty first. Then loops through the data structure of the highest number of value.
+        // Adds the next prime number of the highest prime number in the binary tree.
+        // Also checks if the data structure is empty first.
         private void AddNextPrimeToDatastructure()
         {
-            if(!Utils.IsListEmpty(listOfPrimes))
+            if(binTree.Root != null)
             {
-                int highest = 0;
-                for(int i = 0; i < listOfPrimes.Count; i++)
-                {
-                    if(listOfPrimes[i] > highest)
-                    {
-                        highest = listOfPrimes[i];
-                    }
-                }
-
+                int highest = binTree.MaxVal();
                 int nextPrime = Utils.GetNextPrimeNr(highest);
-                listOfPrimes.Add(nextPrime);
+                binTree.Add(nextPrime);
                 Console.Clear();
-                Console.WriteLine($"{nextPrime} has now been added to the data stucture");
+                Console.WriteLine($"{nextPrime} has now been added to the binary tree\n");
             }
             else
             {
@@ -94,23 +87,51 @@ namespace DatalogiInlamningsuppgfit1
         private void ShowDatastructure()
         {
             Console.Clear();
-            for(int i = 0; i < listOfPrimes.Count; i++)
+            if(binTree.Root != null)
             {
-                if(i == listOfPrimes.Count - 1)
+                Console.WriteLine(binTree.TraversePreOrder() + "\n");
+                ShowBinTreeInOrder();
+            }
+            else
+            {
+                Console.WriteLine("Binary tree is empty\n");
+            }
+        }
+
+        private void ShowBinTreeInOrder()
+        {
+            bool runMenu = true;
+            nrOfMenuChoices = 2;
+            while (runMenu)
+            {
+                Console.WriteLine("1. Show tree in Order\n0. Exit\n");
+                var input = Console.ReadLine();
+                if (Utils.IsMenuInputValid(input, out menuChoice, out errormsg, nrOfMenuChoices))
                 {
-                    Console.Write($"{listOfPrimes[i]}");
+                    switch (menuChoice)
+                    {
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine(binTree.TraverseInOrder() + "\n");
+                            break;
+                        case 0:
+                            runMenu = false;
+                            Console.Clear();
+                            break;
+                    }
                 }
                 else
                 {
-                    Console.Write($"{listOfPrimes[i]}, ");
+                    Console.Clear();
+                    Console.WriteLine(errormsg);
                 }
+
             }
-            Console.WriteLine("\n");
         }
 
         // Enables user to enter a input.
         // Then checks if this input is valid and if its a prime
-        // If input is a prime, it gets added to the list of primes
+        // If input is a prime, it gets added to the binary tree of primes
         private void EnterAPrimeNr()
         {
             Console.Clear();
@@ -122,13 +143,20 @@ namespace DatalogiInlamningsuppgfit1
                 if (Utils.IsPrimeNumber(validNumber))
                 {
                     Console.Clear();
-                    Console.WriteLine($"{validNumber} is a prime number!\nAnd is now added to a generic data structure, also called a List :)\n");
-                    listOfPrimes.Add(validNumber);
+                    
+                    if(binTree.Add(validNumber))
+                    { 
+                        Console.WriteLine($"{validNumber} is a prime number!\nAnd is now added to the binary tree :)\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Value already exists in the binary tree\nChoose another one\n");
+                    }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine($"Im sorry but {validNumber} is not a prime number");
+                    Console.WriteLine($"Im sorry but {validNumber} is not a prime number\n");
                 }
             }
             else

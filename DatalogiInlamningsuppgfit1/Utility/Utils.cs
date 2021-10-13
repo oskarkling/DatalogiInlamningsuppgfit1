@@ -43,7 +43,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
                 }
                 else
                 {
-                    errormsg = $"Menu choice is out for range for menu choices. Use 0 - {nrOfMenuChoices - 1}";
+                    errormsg = $"Menu choice is out for range for menu choices. Use 0 - {nrOfMenuChoices - 1}\n";
                     return false;
                 }
             }
@@ -85,7 +85,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
                             }
                             else
                             {
-                                errormsg = "You can not input 0.\nIs 0 a Natural Number? No, 0 is NOT a natural number because natural numbers are counting numbers. For counting any number of objects, we start counting from 1 and not from 0.";
+                                errormsg = "You can not input 0.\nIs 0 a Natural Number? No, 0 is NOT a natural number because natural numbers are counting numbers. For counting any number of objects, we start counting from 1 and not from 0.\n";
                                 return false;
                             }
                         }

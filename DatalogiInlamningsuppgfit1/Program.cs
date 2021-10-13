@@ -1,6 +1,7 @@
 ﻿using System;
 using DatalogiInlamningsuppgfit1.Utility;
 using DatalogiInlamningsuppgfit1;
+using DatalogiInlamningsuppgfit1.DataStructures;
 
 
 namespace DatalogiInlamningsuppgfit1
@@ -15,7 +16,6 @@ namespace DatalogiInlamningsuppgfit1
             }
 
             Core core = new Core();
-
         }
     }
 }
