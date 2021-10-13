@@ -12,8 +12,8 @@ namespace DatalogiInlamningsuppgfit1
 {
     internal class Core
     {
-        private int menuChoice;
-        private int nrOfMenuChoices;
+        private long menuChoice;
+        private long nrOfMenuChoices;
         private string errormsg;
         private BinaryTree binTree;
 
@@ -30,9 +30,9 @@ namespace DatalogiInlamningsuppgfit1
         private void Menu()
         {
             bool runMenu = true;
-            nrOfMenuChoices = 4;
             while (runMenu)
             {
+                nrOfMenuChoices = 4;
                 Console.WriteLine("1. Add prime nr\n2. Show binary tree of added primes\n3. Add next prime number of the highest number in the data structure\n0. Exit\n");
                 var input = Console.ReadLine();
                 if (Utils.IsMenuInputValid(input, out menuChoice, out errormsg, nrOfMenuChoices))
@@ -70,8 +70,8 @@ namespace DatalogiInlamningsuppgfit1
         {
             if(binTree.Root != null)
             {
-                int highest = binTree.MaxVal();
-                int nextPrime = Utils.GetNextPrimeNr(highest);
+                long highest = binTree.MaxVal();
+                long nextPrime = Utils.GetNextPrimeNr(highest);
                 binTree.Add(nextPrime);
                 Console.Clear();
                 Console.WriteLine($"{nextPrime} has now been added to the binary tree\n");
@@ -101,9 +101,9 @@ namespace DatalogiInlamningsuppgfit1
         private void ShowBinTreeInOrder()
         {
             bool runMenu = true;
-            nrOfMenuChoices = 2;
             while (runMenu)
             {
+                nrOfMenuChoices = 2;
                 Console.WriteLine("1. Show tree in Order\n0. Exit\n");
                 var input = Console.ReadLine();
                 if (Utils.IsMenuInputValid(input, out menuChoice, out errormsg, nrOfMenuChoices))
@@ -136,7 +136,7 @@ namespace DatalogiInlamningsuppgfit1
         {
             Console.Clear();
             Console.WriteLine("Enter a prime number");
-            int validNumber;
+            long validNumber;
             var input = Console.ReadLine();
             if(Utils.IsInputValid(input, out validNumber, out errormsg, false))
             {

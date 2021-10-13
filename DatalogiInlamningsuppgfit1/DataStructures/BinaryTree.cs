@@ -12,7 +12,7 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
         public string TreeAsString { get; set; }
 
         // Adds a value to the binary tree, thus creating a Node
-        public bool Add(int val)
+        public bool Add(long val)
         {
             Node before = null;
             Node next = this.Root;
@@ -60,12 +60,12 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
             return true;
         }
 
-        public Node Find(int val)
+        public Node Find(long val)
         {
             return this.Find(val, this.Root);
         }
 
-        public void Remove(int val)
+        public void Remove(long val)
         {
             this.Root = Remove(this.Root, val);
         }
@@ -85,9 +85,9 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
         }
 
         // Gets the max value in the binary tree
-        public int MaxVal()
+        public long MaxVal()
         {
-            int maxVal = this.Root.Data;
+            long maxVal = this.Root.Data;
             Node newNode = this.Root;
 
             while(newNode.Right != null)
@@ -120,7 +120,7 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
         }
 
         // Recursive Remove method
-        private Node Remove(Node parent, int val)
+        private Node Remove(Node parent, long val)
         {
             if(parent == null)
             {
@@ -158,9 +158,9 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
         }
 
         // Gets the node with the smallest value
-        private int MinVal(Node node)
+        private long MinVal(Node node)
         {
-            int minVal = node.Data;
+            long minVal = node.Data;
             while(node.Left != null)
             {
                 minVal = node.Left.Data;
@@ -172,7 +172,7 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
 
         // Recursive method of finding the node with the Value
         // If no node is found, return null
-        private Node Find(int val, Node parent)
+        private Node Find(long val, Node parent)
         {
             if(parent != null)
             {

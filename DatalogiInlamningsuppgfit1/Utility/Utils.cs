@@ -14,12 +14,12 @@ namespace DatalogiInlamningsuppgfit1.Utility
         // First it sends false if nr = 1 or true if nr = 2
         // Then gets max possible checks with square root of nr
         // Then uses modulus. If there is a rest from modulus- it is a prime number.
-        public static bool IsPrimeNumber(int nr)
+        public static bool IsPrimeNumber(long nr)
         {
             if (nr == 1) return false;
             if (nr == 2) return true;
             var max = Math.Ceiling(Math.Sqrt(nr));
-            for(int i = 2; i <= max; i++)
+            for(long i = 2; i <= max; i++)
             {
                 if(nr % i == 0)
                 {
@@ -30,7 +30,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
         }
 
         // Checks if user menu input is valid
-        public static bool IsMenuInputValid(string input, out int validNumber, out string errormsg, int nrOfMenuChoices)
+        public static bool IsMenuInputValid(string input, out long validNumber, out string errormsg, long nrOfMenuChoices)
         {
             errormsg = "no error";
             validNumber = 0;
@@ -57,7 +57,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
         // Checks if user input is valid
         // if its empty, anumber or if the input is zero
         // if not successful it sends an errormsg also.
-        public static bool IsInputValid(string input, out int validNumber, out string errormsg, bool canBeZero)
+        public static bool IsInputValid(string input, out long validNumber, out string errormsg, bool canBeZero)
         {
             errormsg = "no error";
             validNumber = 0;
@@ -117,7 +117,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
         }
 
         // Returns the next Prime number
-        public static int GetNextPrimeNr(int number)
+        public static long GetNextPrimeNr(long number)
         {
             bool found = false;
             while(!found)
@@ -134,9 +134,9 @@ namespace DatalogiInlamningsuppgfit1.Utility
 
         // Checks if string input is a number
         // Then sends an int with that number
-        private static bool IsInputANumber(string input, out int number)
+        private static bool IsInputANumber(string input, out long number)
         {
-            return Int32.TryParse(input, out number);
+            return long.TryParse(input, out number);
         }
 
         // Checks if string is empty
@@ -146,7 +146,7 @@ namespace DatalogiInlamningsuppgfit1.Utility
         }
 
         // Checks if the number is negative
-        private static bool IsNumberNegative(int number)
+        private static bool IsNumberNegative(long number)
         {
             return number < 0;
         }

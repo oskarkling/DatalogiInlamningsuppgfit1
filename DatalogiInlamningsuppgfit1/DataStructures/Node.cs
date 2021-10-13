@@ -12,7 +12,7 @@ namespace DatalogiInlamningsuppgfit1.DataStructures
     {
         public Node Left { get; set; }
         public Node Right { get; set; }
-        public int Data { get; set; }
+        public long Data { get; set; }
 
     }
 }
