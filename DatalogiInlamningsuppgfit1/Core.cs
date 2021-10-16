@@ -18,7 +18,7 @@ namespace DatalogiInlamningsuppgfit1
         private string errormsg;
         private BinaryTree binTree;
         private Stopwatch stopwatch;
-
+        private int ost;
         // Constructor initalizes the variables and list
         internal Core()
         {
